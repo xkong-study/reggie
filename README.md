@@ -1,6 +1,8 @@
+跟着黑马程序员的java项目《瑞吉外卖》实战，一共14天(springboot+mybatis+mysql)。     
+
 Day01:    
 
-跟着黑马程序员的java项目《瑞吉外卖》实战，一共14天。这个用的包是mybatis-plus:    
+这个用的包是mybatis-plus:    
 1.所以可以直接baseMapper对数据库进行增删改查。   
 2.直接用ServiceImpl对数据库进行增删改查。    
 3.用LamadaQueryWrapper查询数据库的对象。    
