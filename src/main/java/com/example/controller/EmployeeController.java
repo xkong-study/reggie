@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
@@ -92,5 +91,27 @@ public class EmployeeController {
         employeeService.save(employee);
         return R.success("成功");
     }
-
+    @GetMapping("/page")
+    public R<Page> page(int page,int pageSize,String name){
+        log.info("page={},pageSize={},name={}",page,pageSize,name);
+        Page<Employee> pageInfo = new Page<>(page,pageSize);
+        //构造分页构造器
+        //构造条件构造器
+        LambdaQueryWrapper<Employee> lambdaQueryWrapper  = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.like(StringUtils.isNotEmpty(name),Employee::getName,name);
+        //排序条件
+        lambdaQueryWrapper.orderByDesc(Employee::getUpdateTime);
+        //执行查询
+        employeeService.page(pageInfo,lambdaQueryWrapper);
+        return R.success(pageInfo);
+    }
+    @PutMapping
+    public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
+        log.info("employee:{}",employee);
+        Long emId = (Long) request.getSession().getAttribute("employee");
+        employee.setUpdateUser(emId);
+        employee.setUpdateTime(LocalDateTime.now());
+        employeeService.updateById(employee);
+        return R.success("添加成功");
+    }
 }
