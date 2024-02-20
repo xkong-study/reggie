@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.common.BaseContext;
 import com.example.common.R;
 import com.example.entity.Employee;
 import com.example.service.EmployeeService;
@@ -73,9 +74,9 @@ public class EmployeeController {
     }
     @PostMapping("/logout")
     public R<String> Logout(HttpServletRequest request,Employee employee){
-        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Employee::getUsername,employee.getUsername());
-        Employee em = employeeService.getOne(queryWrapper);
+//        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.eq(Employee::getUsername,employee.getUsername());
+//        Employee em = employeeService.getOne(queryWrapper);
         request.getSession().removeAttribute("employee");
         return R.success("退出成功");
     }
@@ -109,9 +110,16 @@ public class EmployeeController {
     public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
         log.info("employee:{}",employee);
         Long emId = (Long) request.getSession().getAttribute("employee");
-        employee.setUpdateUser(emId);
-        employee.setUpdateTime(LocalDateTime.now());
+        BaseContext.setThreadLocal(emId);
+//        employee.setUpdateUser(emId);
+//        employee.setUpdateTime(LocalDateTime.now());
         employeeService.updateById(employee);
         return R.success("添加成功");
+    }
+    @GetMapping("/{id}")
+    public R<Employee> getById(@PathVariable Long id){
+        log.info("员工Id:{}",id);
+        Employee employ = new EmployeeService().getById(id);
+        return R.success(employ);
     }
 }

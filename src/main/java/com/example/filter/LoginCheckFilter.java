@@ -38,8 +38,11 @@ public class LoginCheckFilter implements Filter {
         //5、如果没登灵则返回夫登录结果
         Object user = request.getSession().getAttribute("employee");
         if(user!=null){
+            Long id = Thread.currentThread().getId();
+            log.info("线程id为:{}",id);
             filterChain.doFilter(request,response);
         }
+
         // 5.如果未登录，则返回未登录结果
         // 由于前端代码中引入了js/request.js，相应拦截器会帮我们跳转到登录页面，所以这里不需要跳转，只需要返回未登录结果即可
         // 即只要通过输出流,包装通用返回结果类，返回未登录结果即可
