@@ -92,6 +92,7 @@ public class EmployeeController {
         employeeService.save(employee);
         return R.success("成功");
     }
+
     @GetMapping("/page")
     public R<Page> page(int page,int pageSize,String name){
         log.info("page={},pageSize={},name={}",page,pageSize,name);
@@ -116,6 +117,7 @@ public class EmployeeController {
         employeeService.updateById(employee);
         return R.success("添加成功");
     }
+
     @GetMapping("/{id}")
     public R<Employee> getById(@PathVariable Long id){
         log.info("员工Id:{}",id);
