@@ -67,7 +67,7 @@ public class EmployeeController {
         if (emp.getStatus() == 0) {
             return R.error("用户名或密码不正确!");  // 为了安全，这里不返回具体的错误信息
         }
-
+        log.info("employee:{}",emp.getId());
         // 6.如果都正确，将员工id存入session中，返回成功信息
         request.getSession().setAttribute("employee", emp.getId());
         return R.success(emp);
@@ -111,6 +111,7 @@ public class EmployeeController {
     public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
         log.info("employee:{}",employee);
         Long emId = (Long) request.getSession().getAttribute("employee");
+        log.info("emId:{}",emId);
         BaseContext.setThreadLocal(emId);
 //        employee.setUpdateUser(emId);
 //        employee.setUpdateTime(LocalDateTime.now());

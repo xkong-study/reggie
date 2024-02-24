@@ -40,7 +40,7 @@ public class CommonController {
         catch(CustomException exception){
             return R.error(String.valueOf(exception));
         }
-        return R.success("上传成功");
+        return R.success(fileName);
     }
 
     @GetMapping("/download")

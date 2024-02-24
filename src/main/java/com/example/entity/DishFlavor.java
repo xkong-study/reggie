@@ -13,12 +13,12 @@ public class DishFlavor implements Serializable {
    private String name;
    private String value;
    @TableField(fill= FieldFill.INSERT)
-   private LocalDateTime createTime;
+   private LocalDateTime create_time;
    @TableField(fill=FieldFill.INSERT_UPDATE)
-   private LocalDateTime updateTime;
+   private LocalDateTime update_time;
    @TableField(fill=FieldFill.INSERT)
-   private Long createUser;
+   private Long create_user;
    @TableField(fill=FieldFill.INSERT)
-   private Long updateUser;
+   private Long update_user;
    private Integer isDeleted;
 }

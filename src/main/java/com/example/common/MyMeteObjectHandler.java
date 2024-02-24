@@ -14,12 +14,14 @@ public class MyMeteObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         metaObject.setValue("create_time", LocalDateTime.now());
+        metaObject.setValue("create_user", Long.parseLong("1"));
+        metaObject.setValue("update_user", Long.parseLong("1"));
         metaObject.setValue("update_time", LocalDateTime.now());
     }
     //更新数据时更新
     @Override
     public void updateFill(MetaObject metaObject) {
-        metaObject.setValue("update_user", BaseContext.getThreadLocal());
+        metaObject.setValue("update_user", Long.parseLong("1"));
         metaObject.setValue("update_time", LocalDateTime.now());
     }
 }

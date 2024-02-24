@@ -50,19 +50,19 @@ public class Dish implements Serializable {
 
 
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime create_time;
 
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
+    private LocalDateTime update_time;
 
 
     @TableField(fill = FieldFill.INSERT)
-    private Long createUser;
+    private Long create_user;
 
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateUser;
+    private Long update_user;
 
 
     //是否删除
