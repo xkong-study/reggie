@@ -53,6 +53,7 @@ public class DishController {
         List<Dish> records = page1.getRecords();
         List<DishDto> list = records.stream().map((item)->{
             DishDto dishDto = new DishDto();
+            BeanUtils.copyProperties(item,dishDto);
             Long categoryId = item.getCategoryId();
             Category category = categoryService.getById(categoryId);
             String categoryName = category.getName();
@@ -60,6 +61,13 @@ public class DishController {
             return dishDto;
         }).collect(Collectors.toList());
         pageDto.setRecords(list);
+        log.info("page1:{}",list);
         return R.success(pageDto);
+    }
+
+    @GetMapping("/{id}")
+    public R<DishDto> get(@PathVariable Long id){
+           DishDto dishDto = dishService.getByIdWithFlavor(id);
+           return R.success(dishDto);
     }
 }
