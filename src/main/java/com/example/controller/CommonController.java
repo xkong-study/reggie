@@ -27,7 +27,7 @@ public class CommonController {
 //    @Value("${Reggie.path}");
     @PostMapping("/upload")
     public R upload(MultipartFile file) throws IOException {
-        String uploadPath = "/Users/kong/Desktop/SpringBootDemo/img/";
+        String uploadPath = "/Users/kongxiangrui/Desktop/img/";
         File dir = new File(uploadPath);
         if(!dir.exists()) dir.mkdirs();
         //File是一个临时文件，秀要转存到指定位置，否则本次请求完成后份时文件会删除
@@ -46,7 +46,7 @@ public class CommonController {
     @GetMapping("/download")
     public void download(String name,HttpServletResponse response) throws Exception {
         log.info("name:{}",name);
-        String uploadPath = "/Users/kong/Desktop/SpringBootDemo/img/";
+        String uploadPath = "/Users/kongxiangrui/Desktop/img/";
         //通过输入流读取数据
         try{
             FileInputStream inputStream = new FileInputStream(new File(uploadPath + name));
